@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>データベース</title>
+    <style>
+        label {
+            display: inline-block;
+            width: 150px
+        }
+        input,select{width: 250px; height: 40px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+
+<body>
+        <!-- タイトル -->
+    <div class="header">
+        <h1 class="header-title">パンチライン格納庫</h1>
+    
+    </div>
+
+    <!-- 説明文 -->
+   
+    <div class="explain_01">
+        パンチラインとは
+    </div>
+
+    <div class="explain_02">
+    「(ラップなどにおける)印象的なフレーズ、言い回し」<br>
+    曲やラップバトルで、印象的な言葉、衝撃的だった言葉を指します! <br>
+
+    </div>
+
+    <!-- 画像 -->
+    <div class="explain_03">
+        <img class="img" src="img/setumei.jpeg" alt="説明">
+     </div>
+
+    <div class="explain_04">
+        このサイトは印象に残ったフレーズを記録しておくデータバンクです<br>
+        ラップの歌詞に限らず・・・<br>
+        <ul>
+            <li type="circle">有名人の格言</li>
+            <li type="circle">漫画・アニメの名言</li>
+            <li type="circle">座右の銘</li>
+            <li type="circle">etc.....</li>
+        </ul>
+
+        覚えておきたいフレーズを記録する<br>
+        備忘録としてご利用ください！
+
+    </div>
+
+    <!-- スライドする画像 -->
+    <ul class="slider">
+        <li><img src="img/roop1.jpeg" alt="eminem"></li>
+        <li><img src="img/roop2.jpeg" alt="安西先生"></li>
+        <!-- <li><img src="img/roop3.jpeg" alt="リンカーン"></li> -->
+        <li><img src="img/roop4.jpeg" alt="リヴァイ"></li>
+        <li><img src="img/roop5.jpeg" alt="ひろゆき"></li>
+        <li><img src="img/roop6.jpeg" alt="黒ひげ"></li>
+        <li><img src="img/roop7.jpeg" alt="ミスチル"></li>
+        <li><img src="img/roop8.jpeg" alt="日向"></li>
+        <!-- <li><img src="img/roop9.jpeg" alt="デカルト"></li> -->
+        <li><img src="img/roop10.jpeg" alt="範馬勇次郎"></li>
+        <!--/slider-->
+    </ul>
+
+    <div class="explain_05">
+        名前・入庫番号・保存したい言葉をそれぞれ入力するとデータベースに保存されます
+    </div>
+    
+
+    <main>
+        <div class="text_input">
+        <!-- 入力目次 -->
+        <label>名前</label> <input id="Namebox" type="text"> <br><br>
+        <label>入庫番号</label> <input id="Rollbox" type="text"> <br><br>
+        <label>言葉を入力</label> <input id="Secbox" type="text"> <br><br>
+        <!-- <label>Gender</label> 
+        <select id="Genbox">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select> -->
+        </div>
+
+        <!-- 入力ボタン -->
+        <div class="btn">
+            <hr>
+            <button id="insbtn">送信する</button>
+            <button id="selbtn">選択する</button>
+            <button id="updbtn">更新する</button>
+            <button id="delbtn">削除する</button>
+        </div>
+
+        <div class="tyuui">
+            ※ボタンの説明<br>
+            送信する：新しいテキストデータをデータベースに送信する<br>
+            選択する：数字を入力するとデータベースから記録を呼び起こせる<br>
+            更新する：既存のテキストデータを新しくする<br>
+            削除する：データベースに記録しているデータを消去する
+        </div>
+    </main>
+
+    <!--  firebase realtime database-->
+    <!-- インポート＋コンフィグ -->
+     <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyA1lHCl_XqctZHPkR6DHZiUz-MGOIF6SAs",
+                authDomain: "kadai-haga.firebaseapp.com",
+                databaseURL: "https://kadai-haga-default-rtdb.firebaseio.com",
+                projectId: "kadai-haga",
+                storageBucket: "kadai-haga.appspot.com",
+                messagingSenderId: "290430704571",
+                appId: "1:290430704571:web:05fe298692d540c1b1829e"
+            };
+
+            // Initialize Firebase 初期化
+            const app = initializeApp(firebaseConfig);
+
+            import {getDatabase, ref, get, set, child, update, remove}
+            from "https://www.gstatic.com/firebasejs/9.6.2/firebase-database.js";
+
+            const db = getDatabase();
+
+            // レファレンス 参照 getElementById= idが指定された文字列に一致する要素を代入
+            
+            let namebox = document.getElementById("Namebox");
+            let rollbox = document.getElementById("Rollbox");
+            let secbox = document.getElementById("Secbox");
+            let genbox = document.getElementById("Genbox");
+
+            let insbtn = document.getElementById("insbtn");
+            let selbtn = document.getElementById("selbtn");
+            let updbtn = document.getElementById("updbtn");
+            let delbtn = document.getElementById("delbtn");
+
+            // インサートデータ：データを追加する　setは追加
+            function insertData(){
+                set(ref(db, "Thestudents/"+ rollbox.value),{  
+                    NameofStd: namebox.value,
+                    RollNo: rollbox.value,
+                    Section: secbox.value,
+                    // Gender: genbox.value,
+                })
+                .then(()=>{
+                    alert("data stored successfully!");
+                })
+                .catch((error)=>{
+                    alert("unsuccessfully, error"+error);
+                });
+            }
+
+            // セレクトデータ：データを選ぶ　getはプロパティが参照された時に関数が呼び出されるようにする
+
+            function selectData(){
+                const dbref = ref(db);
+
+                get(child(dbref,"Thestudents/"+ rollbox.value)).then((snapshot)=>{
+                    if(snapshot.exists()){
+                    namebox.value = snapshot.val().NameofStd;
+                    secbox.value = snapshot.val().Section;
+                    // genbox.value = snapshot.val().Gender;
+                }
+                else{
+                    console.log(snapshot);
+                    alert("No data found");
+                    }
+                })
+                .catch((error)=>{
+                    alert("unsuccessfully, error" + error);
+                });
+            }
+
+            // アップデートデータ:データの更新
+
+            function updateData(){
+                update(ref(db, "Thestudents/" + rollbox.value), {
+                    NameofStd: namebox.value,
+                    Section: secbox.value,
+                    // Gender: genbox.value,
+                })
+                    .then(() => {
+                        alert("data stored successfully!");
+                    })
+                    .catch((error) => {
+                        alert("unsuccessfully, error" + error);
+                    });
+            }
+
+             // デリートデータ：データの削除
+
+                function deleteData() {
+                    remove(ref(db, "Thestudents/" + rollbox.value))
+                    
+                        .then(() => {
+                            alert("data removed successfully!");
+                        })
+                        .catch((error) => {
+                            alert("unsuccessfully, error" + error);
+                        });
+                }
+
+            // assign EVENT btn：イベントボタンの割り当て　addEventListener=特定のイベントが対象に配信されるたびに呼び出される関数を設定
+            insbtn.addEventListener("click", insertData);
+            selbtn.addEventListener("click", selectData);
+            updbtn.addEventListener("click", updateData);
+            delbtn.addEventListener("click", deleteData);
+
+        </script>
+
+        <!-- 中央画像のスライド -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <!--JS-->
+        <script src="js/6-1-6.js"></script>
+        
+
+
+        <footer>
+            <div class="footer">
+                <small>copyrights 2021-2022 G`s Academy Fukuoka All RIghts Reserved.</small>
+            </div>
+        </footer>
+</body>    
