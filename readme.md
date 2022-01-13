@@ -20,7 +20,7 @@
 ・ググる際に記事をアップした期間を気にせずに行っていたので、古い記事を見て間違ったコードを書いていたこと（firebase v9ではなくv８の記事を見ていました笑）
 <br>
 
-#
+##https://haga-yosuke.github.io/20220113kadai-punchline/
 
 
 
