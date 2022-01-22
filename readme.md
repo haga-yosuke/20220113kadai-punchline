@@ -7,7 +7,7 @@
 
 
 ## 工夫した点，こだわった点
-
+U
 ・firebaseのrealtimeDatabaseでテキストのデータベース保存を実行できるようにしました。 <br>
 ・https://www.youtube.com/watch?v=BOITPwChVP4　の動画を参考に自分なりのスタイルに魔改造を実施しました。<br>
 
@@ -20,7 +20,7 @@
 ・ググる際に記事をアップした期間を気にせずに行っていたので、古い記事を見て間違ったコードを書いていたこと（firebase v9ではなくv８の記事を見ていました笑）
 <br>
 
-## https://haga-yosuke.github.io/20220113kadai-punchline/
+##URL https://haga-yosuke.github.io/20220113kadai-punchline/
 
 
 

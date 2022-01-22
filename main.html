@@ -6,22 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>データベース</title>
-    <style>
-        label {
-            display: inline-block;
-            width: 150px
-        }
-        input,select{width: 250px; height: 40px;}
-    </style>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
         <!-- タイトル -->
     <div class="header">
-        <h1 class="header-title">パンチライン格納庫</h1>
-    
+        <h1 class="header-title">Punch Line Hanger</h1>
+        <h2>パンチライン格納庫</h2>
     </div>
 
     <!-- 説明文 -->
@@ -42,7 +39,7 @@
      </div>
 
     <div class="explain_04">
-        このサイトは印象に残ったフレーズを記録しておくデータバンクです<br>
+        このサイトは印象に残ったフレーズを記録しておくデータ保存サービスです<br>
         ラップの歌詞に限らず・・・<br>
         <ul>
             <li type="circle">有名人の格言</li>
@@ -58,36 +55,33 @@
 
     <!-- スライドする画像 -->
     <ul class="slider">
-        <li><img src="img/roop1.jpeg" alt="eminem"></li>
-        <li><img src="img/roop2.jpeg" alt="安西先生"></li>
+        <li><img id="fuk" src="img/roop11.jpeg" alt="ノエル"></li>
+        <li><img id="anzai" src="img/roop2.jpeg" alt="安西先生"></li>
         <!-- <li><img src="img/roop3.jpeg" alt="リンカーン"></li> -->
-        <li><img src="img/roop4.jpeg" alt="リヴァイ"></li>
-        <li><img src="img/roop5.jpeg" alt="ひろゆき"></li>
-        <li><img src="img/roop6.jpeg" alt="黒ひげ"></li>
-        <li><img src="img/roop7.jpeg" alt="ミスチル"></li>
-        <li><img src="img/roop8.jpeg" alt="日向"></li>
+        <li><img id="heityou" src="img/roop4.jpeg" alt="リヴァイ"></li>
+        <li><img id="hiroyuki" src="img/roop5.jpeg" alt="ひろゆき"></li>
+        <li><img id="kurohige" src="img/roop6.jpeg" alt="黒ひげ"></li>
+        <li><img id="misucill" src="img/roop7.jpeg" alt="ミスチル"></li>
+        <li><img id="hyuga" src="img/roop8.jpeg" alt="日向"></li>
         <!-- <li><img src="img/roop9.jpeg" alt="デカルト"></li> -->
-        <li><img src="img/roop10.jpeg" alt="範馬勇次郎"></li>
+        <li><img id="ogre" src="img/roop10.jpeg" alt="範馬勇次郎"></li>
         <!--/slider-->
     </ul>
 
     <div class="explain_05">
-        名前・入庫番号・保存したい言葉をそれぞれ入力するとデータベースに保存されます
+        名前・入庫番号・保存したい言葉と参照元をそれぞれ入力するとデータベースに保存されます。
     </div>
     
 
     <main>
+        <!-- 入力欄 -->
         <div class="text_input">
-        <!-- 入力目次 -->
-        <label>名前</label> <input id="Namebox" type="text"> <br><br>
-        <label>入庫番号</label> <input id="Rollbox" type="text"> <br><br>
-        <label>言葉を入力</label> <input id="Secbox" type="text"> <br><br>
-        <!-- <label>Gender</label> 
-        <select id="Genbox">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select> -->
+            <label>名前</label> <input id="Namebox" type="text"> <br><br>
+            <label>入庫番号</label> <input id="Rollbox" type="text"> <br><br>
         </div>
+            <label id="Sec">言葉を入力</label> <input id="Secbox" type="text"> <br><br>
+            <label id="Gen">参照元</label> <input id="Genbox" type="text"> <br><br>
+        
 
         <!-- 入力ボタン -->
         <div class="btn">
@@ -117,7 +111,7 @@
 
             // Your web app's Firebase configuration
             const firebaseConfig = {
-                apiKey: "",
+                apiKey: "AIzaSyA1lHCl_XqctZHPkR6DHZiUz-MGOIF6SAs",
                 authDomain: "kadai-haga.firebaseapp.com",
                 databaseURL: "https://kadai-haga-default-rtdb.firebaseio.com",
                 projectId: "kadai-haga",
@@ -148,17 +142,17 @@
 
             // インサートデータ：データを追加する　setは追加
             function insertData(){
-                set(ref(db, "Thestudents/"+ rollbox.value),{  
+                set(ref(db, "Words/"+ rollbox.value),{  
                     NameofStd: namebox.value,
                     RollNo: rollbox.value,
                     Section: secbox.value,
-                    // Gender: genbox.value,
+                    Gender: genbox.value,
                 })
                 .then(()=>{
-                    alert("data stored successfully!");
+                    alert("Awesome!!,data stored successfully!");
                 })
                 .catch((error)=>{
-                    alert("unsuccessfully, error"+error);
+                    alert("WTF！！,unsuccessfully, error"+error);
                 });
             }
 
@@ -167,48 +161,48 @@
             function selectData(){
                 const dbref = ref(db);
 
-                get(child(dbref,"Thestudents/"+ rollbox.value)).then((snapshot)=>{
+                get(child(dbref,"Words/"+ rollbox.value)).then((snapshot)=>{
                     if(snapshot.exists()){
                     namebox.value = snapshot.val().NameofStd;
                     secbox.value = snapshot.val().Section;
-                    // genbox.value = snapshot.val().Gender;
+                    genbox.value = snapshot.val().Gender;
                 }
                 else{
                     console.log(snapshot);
-                    alert("No data found");
+                    alert("No data found,bro!!");
                     }
                 })
                 .catch((error)=>{
-                    alert("unsuccessfully, error" + error);
+                    alert("WTF！！,unsuccessfully, error" + error);
                 });
             }
 
             // アップデートデータ:データの更新
 
             function updateData(){
-                update(ref(db, "Thestudents/" + rollbox.value), {
+                update(ref(db, "Words/" + rollbox.value), {
                     NameofStd: namebox.value,
                     Section: secbox.value,
-                    // Gender: genbox.value,
+                    Gender: genbox.value,
                 })
                     .then(() => {
-                        alert("data stored successfully!");
+                        alert("Awesome!!,data stored successfully!");
                     })
                     .catch((error) => {
-                        alert("unsuccessfully, error" + error);
+                        alert("WTF！！,unsuccessfully, error" + error);
                     });
             }
 
              // デリートデータ：データの削除
 
                 function deleteData() {
-                    remove(ref(db, "Thestudents/" + rollbox.value))
+                    remove(ref(db, "Words/" + rollbox.value))
                     
                         .then(() => {
-                            alert("data removed successfully!");
+                            alert("Awesome!!,data removed successfully!");
                         })
                         .catch((error) => {
-                            alert("unsuccessfully, error" + error);
+                            alert("WTF！！,unsuccessfully, error" + error);
                         });
                 }
 
@@ -224,7 +218,7 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-        <!--JS-->
+        <!--画像スライドのJS-->
         <script src="js/6-1-6.js"></script>
         
 

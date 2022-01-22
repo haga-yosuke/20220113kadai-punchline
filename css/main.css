@@ -5,26 +5,51 @@ body{
 
 }
 
+/* ヘッダー画像 */
 .header{
     height: 380px;
-    background: url(/Users/hagayousuke/Desktop/kadai-haga/img/header.jpeg);
+    background: url(/Users/hagayousuke/Desktop/kadai-haga/img/header2.jpeg);
     background-position: center;
     background-size: cover;
-    display: flex;
+    /* display: flex;
  justify-content: center;
  align-items: center;
- flex-direction: column;
+ flex-direction: column; */
  }
 
 .header-title{
-	font-size: 60px;
+	font-size: 30px;
     color:white;
-    display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+   margin-top: 40px;
+    margin-left: 60px;
+    font-family: 'Bitter',serif;
+    border-bottom: 1px solid #cccccc;
+    
 }
 
+@keyframes fade{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+h2{
+  	font-size: 60px;
+    color:white;
+    display: flex; 
+    margin:80px;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+  animation-name: fade;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+}
+
+/* パンチラインの説明 */
 .explain_01{
     font-size: 50px;
     color:orange;
@@ -33,8 +58,8 @@ body{
   align-items: center;
   flex-direction: column;
    margin: 60px 0 24px 0;
+   
 }
-
 
 .explain_02{
     font-size: 25px;
@@ -44,6 +69,7 @@ body{
   align-items: center;
   flex-direction: column;
   margin: 25px 0 25px 0;
+  
 }
 
 .explain_03{
@@ -52,7 +78,7 @@ body{
  text-align:center;
     justify-content: center;
     align-items: center;
-
+  
 }
 
 .img{
@@ -65,13 +91,6 @@ body{
   /* padding:0 ; */
 
 }
-
-/* .explain_03{
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 25px 0 25px 0;    
-} */
 
 .explain_04{
     font-size: 25px;
@@ -100,7 +119,7 @@ body{
 /*slickのJSで書かれるタグ内、スライド左右の余白調整*/
 
 .slider .slick-slide {
-    margin:0 10px;
+    margin:0 30px;
 }
 
 /*矢印の設定*/
@@ -112,8 +131,8 @@ body{
     top: 42%;
     cursor: pointer;/*マウスカーソルを指マークに*/
     outline: none;/*クリックをしたら出てくる枠線を消す*/
-    border-top: 2px solid #666;/*矢印の色*/
-    border-right: 2px solid #666;/*矢印の色*/
+    border-top: 2px solid black;/*矢印の色*/
+    border-right: 2px solid black;/*矢印の色*/
     height: 15px;
     width: 15px;
 }
@@ -132,19 +151,19 @@ body{
 
 .slick-dots {
     text-align:center;
-  margin:20px 0 0 0;
+  margin:30px 0 0 0;
 }
 
 .slick-dots li {
     display:inline-block;
-  margin:0 5px;
+  margin:0 10px;
 }
 
 .slick-dots button {
     color: transparent;
     outline: none;
-    width:8px;/*ドットボタンのサイズ*/
-    height:8px;/*ドットボタンのサイズ*/
+    width:10px;/*ドットボタンのサイズ*/
+    height:10px;/*ドットボタンのサイズ*/
     display:block;
     border-radius:50%;
     background:#ccc;/*ドットボタンの色*/
@@ -160,6 +179,56 @@ ul{
   list-style: none;
 }
 
+#fuk{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+}
+
+#anzai{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  
+}
+
+#heityou{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  
+}
+
+#hiroyuki{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+}
+
+#kurohige{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+}
+
+#misucill{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+}
+
+#hyuga{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+}
+
+#ogre{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+}
+
 .explain_05{
     font-size: 30px;
     color:orange;
@@ -167,20 +236,48 @@ ul{
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 25px 0 25px 0;    
+  margin: 25px 0 25px 0;   
+  
 }
 
-/* テキスト部分 */
+/* データ入力欄 */
+
+label {
+  display: inline-block;
+  width: 200px
+}
+
+/* input,select{width: 800px; height: 50px;} */
+#Namebox{
+  width: 300px; height: 50px;
+}
+
+#Rollbox{
+  width: 120px; height: 50px;
+}
+
 .text_input{
-   font-size: 25px;
+   font-size: 35px;
     color:black;
     display: flex;
   justify-content: center;
   align-items: center;
   /* flex-direction: column; */
-
 }
 
+#Sec{
+  font-size: 35px;
+}
+#Secbox{
+  width: 1000px; height: 50px;
+}
+
+#Gen{
+  font-size: 35px;
+}
+#Genbox{
+  width: 500px; height: 50px;
+}
 
 .tyuui{
     font-size: 20px;
@@ -188,6 +285,25 @@ ul{
     padding: 24px 0 20px 0;
 }
 
+#insbtn{
+  font-size: 30px;
+  margin-left: 400px;
+}
+
+#selbtn{
+  font-size: 30px;
+  margin-left: 30px;
+}
+
+#updbtn{
+  font-size: 30px;
+  margin-left: 30px;
+}
+
+#delbtn{
+  font-size: 30px;
+  margin-left: 30px;
+}
 
 /* フッター */
 .footer {
@@ -195,7 +311,7 @@ ul{
    height: 50px;
 	font-size: 18px;
 	color:white;
-	background-color:orange;
+	/* background-color:orange; */
     /* margin: 32px 0 ; */
    display: flex;
  justify-content: center;
